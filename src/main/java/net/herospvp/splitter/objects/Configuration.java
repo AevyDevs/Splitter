@@ -63,7 +63,7 @@ public class Configuration {
             Optional<RegisteredServer> opt = instance.getServer().getServer(s);
 
             if (!opt.isPresent()) {
-                logger.warning("The lobby \"" + s + "\" seems to not be present in the velocity's configuration...");
+                logger.warning("The lobby \"" + s + "\" seems to not be present in velocity's configuration...");
                 logger.warning("Therefore, the plugin will ignore that lobby.");
                 return;
             }

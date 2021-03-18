@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 @Plugin(
         id = "splitter",
         name = "Splitter",
-        version = "1.0.0-SNAPSHOT",
+        version = "1.0.1-SNAPSHOT",
         url = "https://www.herospvp.net",
         description = "Keep balance in your lobbies!",
         authors = { "Sorridi" }

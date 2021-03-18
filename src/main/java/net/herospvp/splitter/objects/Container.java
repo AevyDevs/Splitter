@@ -21,12 +21,10 @@ public class Container implements Comparator<LobbyInstance> {
     }
 
     public LobbyInstance getLobbyFrom(RegisteredServer registeredServer) {
-        Optional<LobbyInstance> server = Arrays.stream(lobbyInstances)
+        return Arrays.stream(lobbyInstances)
                 .filter(
                         lobby -> lobby.getRegisteredServer() == registeredServer
-                ).findFirst();
-
-        return server.orElse(null);
+                ).findFirst().orElse(null);
     }
 
     @Override

@@ -18,9 +18,9 @@ public class Events {
     private final LobbyInstance[] lobbyInstances;
 
     public Events(SplitterMain instance) {
-        instance.getServer().getEventManager().register(instance, this);
         this.container = instance.getContainer();
         this.lobbyInstances = container.getLobbyInstances();
+        instance.getServer().getEventManager().register(instance, this);
     }
 
     @Subscribe(order = PostOrder.LAST)
@@ -36,7 +36,9 @@ public class Events {
         if (lobbyInstance == null) {
             return;
         }
+
         Sorting.quickSort(lobbyInstances, container, 0, lobbyInstances.length - 1);
+        lobbyInstance = container.getLobbyInstances()[0];
 
         RegisteredServer lobby = lobbyInstance.getRegisteredServer();
         if (lobby == registeredServer) {
@@ -47,9 +49,10 @@ public class Events {
         if (lobbyInstance.getPlayersConnectedSize() >= lobbyInstance.getMaxPlayers()) {
 
             // checks every other server, some of them may be capable of more players
+            LobbyInstance finalLobbyInstance = lobbyInstance;
             Optional<LobbyInstance> optLobby = Arrays.stream(lobbyInstances)
                     .filter(
-                            instance -> instance.getPlayersConnectedSize() < lobbyInstance.getMaxPlayers()
+                            instance -> instance.getPlayersConnectedSize() < finalLobbyInstance.getMaxPlayers()
                     ).findFirst();
 
             if (!optLobby.isPresent()) {
